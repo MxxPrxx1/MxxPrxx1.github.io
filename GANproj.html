@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCGAN project</title>
+<link rel="stylesheet" href="styles.css"> <!-- Link to your stylesheet, if you have one -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  nav {
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  nav li {
+    float: left;
+    margin-right: 15px;
+  }
+
+  nav a {
+    display: block;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  #container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+
+  #code {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+  }
+
+  #image {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <!-- ... other navigation links ... -->
+  </ul>
+</nav>
+
+<div id="container">
+  <h1>Face generating GAN Project</h1>
+  <p>GAN project guided by video by <a href = "https://www.youtube.com/watch?v=OXWvrRLzEaU&list=PLhhyoLH6IjfwIp8bZnzX8QR30TRcHO8Va&pp=iAQB"> Aladdin Persson.</a> I experimented with different hyperparameters and architectures, some code editing was done using gpt3.5. Script was run in anaconda environment through PyCharm on my pc. I used celebA dataset.</p>
+  <h2>Article</h2>
+  <p><a href = "https://medium.com/@mxxprxx1/competition-brings-out-the-best-in-ai-406e64dac759">Competition Brings Out The Best In AI</a> </p>
+  <h2>Video</h2>
+  <p><a href = "https://www.youtube.com/watch?v=UCJ-gE-paDw">I Generated Fake Human Faces</a></p>
+
+  <h2>Code</h2>
+  <pre id="code">
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    import torchvision
+    import torchvision.transforms as transforms
+    from torch.utils.data import DataLoader
+    from torch.utils.tensorboard import SummaryWriter
+
+    # Set device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Hyperparameters
+    LEARNING_RATE = 2e-4
+    BATCH_SIZE = 128
+    IMAGE_SIZE = 64
+    CHANNELS_IMG = 3  # For color images
+    NOISE_DIM = 100
+    NUM_EPOCHS = 25
+    FEATURES_DISC = 64
+    FEATURES_GEN = 64
+
+    # Load the dataset
+    transform = transforms.Compose([
+        transforms.Resize(IMAGE_SIZE),
+        transforms.CenterCrop(IMAGE_SIZE),
+        transforms.ToTensor(),
+        transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])  # Normalize for 3 channels (RGB)
+    ])
+
+    dataset = torchvision.datasets.ImageFolder(root="dataset/celeb", transform=transform)
+    dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
+
+    # Generator Network
+    class Generator(nn.Module):
+        def __init__(self, channels_noise, channels_img, features_g):
+            super(Generator, self).__init__()
+            self.net = nn.Sequential(
+                # Input: N x channels_noise x 1 x 1
+                self._block(channels_noise, features_g * 16, 4, 1, 0),  # img: 4x4
+                self._block(features_g * 16, features_g * 8, 4, 2, 1),  # img: 8x8
+                self._block(features_g * 8, features_g * 4, 4, 2, 1),  # img: 16x16
+                self._block(features_g * 4, features_g * 2, 4, 2, 1),  # img: 32x32
+                nn.ConvTranspose2d(
+                    features_g * 2, channels_img, kernel_size=4, stride=2, padding=1
+                ),
+                nn.Tanh()  # Output: N x channels_img x 64 x 64
+            )
+
+        def _block(self, in_channels, out_channels, kernel_size, stride, padding):
+            return nn.Sequential(
+                nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride, padding, bias=False),
+                nn.BatchNorm2d(out_channels),
+                nn.ReLU()
+            )
+
+        def forward(self, x):
+            return self.net(x)
+
+    # Discriminator Network
+    class Discriminator(nn.Module):
+        def __init__(self, channels_img, features_d):
+            super(Discriminator, self).__init__()
+            self.disc = nn.Sequential(
+                nn.Conv2d(channels_img, features_d, kernel_size=4, stride=2, padding=1),
+                nn.LeakyReLU(0.2),
+                self._block(features_d, features_d * 2, 4, 2, 1),
+                self._block(features_d * 2, features_d * 4, 4, 2, 1),
+                self._block(features_d * 4, features_d * 8, 4, 2, 1),
+                nn.Conv2d(features_d * 8, 1, kernel_size=4, stride=2, padding=0),
+                nn.Sigmoid()
+            )
+
+        def _block(self, in_channels, out_channels, kernel_size, stride, padding):
+            return nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding, bias=False),
+                nn.BatchNorm2d(out_channels),
+                nn.LeakyReLU(0.2)
+            )
+
+        def forward(self, x):
+            return self.disc(x)
+
+    # Initialize and train the GAN
+    gen = Generator(NOISE_DIM, CHANNELS_IMG, FEATURES_GEN).to(device)
+    disc = Discriminator(CHANNELS_IMG, FEATURES_DISC).to(device)
+    opt_gen = optim.Adam(gen.parameters(), lr=LEARNING_RATE, betas=(0.5, 0.999))
+    opt_disc = optim.Adam(disc.parameters(), lr=LEARNING_RATE, betas=(0.5, 0.999))
+    criterion = nn.BCELoss()
+    fixed_noise = torch.randn(32, NOISE_DIM, 1, 1).to(device)
+    writer_real = SummaryWriter(f"logs/realGPTCNN2")
+    writer_fake = SummaryWriter(f"logs/fakeGPTCNN2")
+    step = 0
+
+    for epoch in range(NUM_EPOCHS):
+        for batch_idx, (real, _) in enumerate(dataloader):
+            real = real.to(device)
+            noise = torch.randn(BATCH_SIZE, NOISE_DIM, 1, 1).to(device)
+            fake = gen(noise)
+
+            # Train Discriminator
+            disc_real = disc(real).reshape(-1)
+            loss_disc_real = criterion(disc_real, torch.ones_like(disc_real))
+            disc_fake = disc(fake.detach()).reshape(-1)
+            loss_disc_fake = criterion(disc_fake, torch.zeros_like(disc_fake))
+            loss_disc = (loss_disc_real + loss_disc_fake) / 2
+            disc.zero_grad()
+            loss_disc.backward()
+            opt_disc.step()
+
+            # Train Generator
+            output = disc(fake).reshape(-1)
+            loss_gen = criterion(output, torch.ones_like(output))
+            gen.zero_grad()
+            loss_gen.backward()
+            opt_gen.step()
+
+            # Print and write to Tensorboard
+            if batch_idx % 100 == 0:
+                print(f"Epoch [{epoch}/{NUM_EPOCHS}] Batch {batch_idx}/{len(dataloader)} \
+                      Loss D: {loss_disc:.4f}, Loss G: {loss_gen:.4f}")
+
+                with torch.no_grad():
+                    fake = gen(fixed_noise)
+                    img_grid_real = torchvision.utils.make_grid(real[:32], normalize=True)
+                    img_grid_fake = torchvision.utils.make_grid(fake[:32], normalize=True)
+                    writer_real.add_image("RealGPTCNN2", img_grid_real, global_step=step)
+                    writer_fake.add_image("FakeGPTCNN2", img_grid_fake, global_step=step)
+                    step += 1
+
+  </pre>
+
+  <h2>Generated Image After 5 epoch, 75 Steps</h2>
+  <img id="image" src="https://cdn-images-1.medium.com/max/1440/1*fzkuom8VKwBnil5tZuG1bA.png" alt="Generated by GAN">
+</div>
+
+</body>
+</html>
