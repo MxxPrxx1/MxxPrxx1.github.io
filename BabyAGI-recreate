@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby AGI without OpenAI</title>
+<link rel="stylesheet" href="styles.css"> <!-- Link to your stylesheet, if you have one -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  nav {
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  nav li {
+    float: left;
+    margin-right: 15px;
+  }
+
+  nav a {
+    display: block;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  #container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+
+  #code {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+  }
+
+  #image {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <!-- ... other navigation links ... -->
+  </ul>
+</nav>
+
+<div id="container">
+  <h1>Task Driven Autonomous Agent</h1>
+  <p>This project was inspired by and guided by <a href = "https://github.com/yoheinakajima/babyagi">Yohei Nakajima's BabyAGI github page</a> and <a href = "https://jeffq.com/blog/an-introduction-to-guidance-babyagi-without-openai/">Jeffrey Quesnelle's blog post</a>, both of which I recommend you check out.<br><br>This project is BabyAGI that doesn't use OAI's API. BabyAGI essentially is a script that uses an LLM to act as different roles like a task executer or task creator to pursue its goal. These different roles allow the overall agent breaks down its objective into smaller tasks and continually execute these tasks until it achieves its objective.</p>
+  <h2>Article</h2>
+  <p><a href = "https://medium.com/@mxxprxx1/60854ed53bf7">Competition Brings Out The Best In AI</a>Task Driven Autonomous Agents</p>
+  <h2>Video</h2>
+  <p><a href = "https://youtu.be/Iuq2zIPGR4k> Multiagent Systems For Greater Performance</a></p>
+
+  <h2>Find the code I ran here</h2>
+<p><a href="https://colab.research.google.com/drive/12cTmfb2FWaY66_mZGG2AlF-brTyRSu7H?usp=sharing">Google Colab</a></P>
+<h2>Sped Up Demo To Be Added Below</h2>
+</div>
+
+</body>
+</html>
