@@ -1,164 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MP Personal Site</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    transition: opacity 1.5s ease-in;
-  }
-
-  #container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-  }
-
-  #selfie {
-    max-width: 100%;
-    border-radius: 50%;
-  }
-
-  #content {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-  #contact {
-    margin: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 60px;  /* Adjusted margin-bottom */
-  }
-
-  nav {
-    background-color: #ffffff;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    width: 100%;
-  }
-
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  nav li {
-    float: left;
-    margin-right: 15px;
-  }
-
-  nav a {
-    display: block;
-    color: #333;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-
-  section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max's Personal Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #000;
+        }
+        .profile-container {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
+        .profile-photo {
+            margin-right: 20px;
+        }
+        .profile-photo img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0; /* Changed from 50% to 0 to make it square */
+        }
+        .welcome-message {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .welcome-message p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #000;
+        }
+        .last-updated {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
+    <h1>Welcome to Max's Personal Site</h1>
+    <div class="profile-container">
+        <div class="profile-photo">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczOweSCBdp0Vg-siJ69kQJMvmOLVz_flTczDrVP2LFibwBR5PPqi4nWW2fhebg17B3-67VhqNtYyKTZLcFrpdLTydsO8aU1H62kcqLV6WCV9kOEpg-0wn_nUHr8yLsrpjqMxPLbVV96TvmZTdDIygGzk=w892-h1234-s-no-gm?authuser=0" alt="Profile Photo">
+        </div>
+        <div class="welcome-message">
+            <p>👋 Yo! I'm Max Provenzano, I'm happy you've made it to my very basic personal site. If you're interested in what I'm currently up to, check my Substack as I'm most active on there <a href="https://maxprovenzano.substack.com/">substack</a>.</p>
+        </div>
+        <div class="last-updated">Last updated: October 2023</div>
+    </div>
+    
+    <div class="content-box">
+        <section id="table-of-contents">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#about-me">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </section>
+    </div>
 
-<nav>
-  <ul>
-    <li><a href="#about-me">About Me</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
-    <li><a href="#videos">Videos</a></li> <!-- Added Videos Tab -->
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#articles">Articles</a></li>
-  </ul>
-</nav>
+    <div class="about-me-box">
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>Hi, I'm Max! I'm an 18 year old, aspiring to be an electrical engineer. I've spent the last year learning about AI 🤖, and developing problem-solving and leadership skills within The Knowledge Society.</p>
+            <p>In my free time, I enjoy hiking 🥾, reading 📚, and experimenting with new technologies 💡. I'm always looking for new challenges and opportunities to grow both personally and professionally.</p>
+            <p>Feel free to reach out if you'd like to connect or collaborate on a project! 🤝</p>
+        </section>
 
-<div id="container">
-  <div id="content">
-    <img id="selfie" src="https://ca.slack-edge.com/TCKE4QSG5-U05QCRFKRAR-99e008cd020c-512" alt="Me">
-    <h1>Welcome to my page</h1>
-    <p>This is a place where I share my work and life.</p>
-  </div>
-</div>
+        <section id="skills">
+            <h2>Relevant Skills</h2>
+            <ul>
+                <li>🐍 Beginner Python Skills</li>
+                <li>💻 Comfortable Using CursorIDE to Code</li>
+                <li>📊 Highschool Level Statistics and Calculus (98% in said classes)</li>
+                <li>👥 Managing Teams and Collaborating (I'm proud of this <a src="https://nostalgic-error-fe9.notion.site/Reducing-MSFTs-Datacenter-Waterloss-08da8947ac594ccba28e242763d8b28a?pvs=4">here</a>)</li>
+                <li>🎥 Producing Video Content</li>
+                <li>✍️ Writing Articles</li>
+            </ul>
+            <p>Most of my actual skill development occurred outside of the tangible projects I've linked here, so please reach out to me if you're looking for more evidence of these skills. 📧</p>
+        </section>
+    </div>
 
-<section id="about-me">
-  <h2>About Me</h2>
-  <p>I'm a passionate learner trying to build a career in tech. Born in BC, Canada. I'm most curious about autonomous AI agents but really I find most things interesting. </p>
-</section>
+    <div class="content-box">
+        <section id="projects">
+            <h2>Projects</h2>
+            <p style="font-size: 18px; color: #000;">
+                Check my projects here
+            </p>
+            <p>
+                <a href="GANproj.html">DCGAN Face Generator</a><br>
+                <a href="BabyAGI-recreate.html">Recreating BabyAGI but with Open Source Models</a><br>
+                <a href="https://colab.research.google.com/drive/1jTEhxJI2opSBCSTzi0gOf4R0AQiCteLR?usp=sharing">Colab Project</a>
+                <a href = "https://nostalgic-error-fe9.notion.site/Reducing-MSFTs-Datacenter-Waterloss-08da8947ac594ccba28e242763d8b28a?pvs=4">Competition Winning Slideshow Reducing MSFT's Water Usage</a><br>
+            </p>
+        </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <p><a href="GANproj.html">DCGAN Face Generator</a><br><a href="BabyAGI-recreate.html">Recreating BabyAGI but with Open Source Models</a></p>
-</section>
+        <section id="newsletter">
+            <h2>Newsletter</h2>
+            <p style="font-size: 18px; color: #000;">
+                Check my substack <a href="https://substack.com/@maxprovenzano">here</a>
+            </p>
+            <p>
+                <a href="https://maxprovenzano.substack.com/p/november-almost-here?utm_source=profile&utm_medium=reader2">Hackathon+Article</a><br>
+                <a href="https://maxprovenzano.substack.com/p/personal-spring-in-fall?utm_source=profile&utm_medium=reader2">Personal Spring in The Fall</a><br>
+                <a href="https://maxprovenzano.substack.com/p/my-most-useful-december-yet">My Most Useful December Yet</a><br>
+                <a href="https://maxprovenzano.substack.com/p/meeting-smart-people-and-selling">Meeting Smart People, Learning To Sell Myself</a><br>
+                <a href="https://maxprovenzano.substack.com/p/wannabe-harvard-business-student?utm_source=profile&utm_medium=reader2">Wannabe Harvard Business Student</a><br>
+                <a href="https://maxprovenzano.substack.com/p/solving-microsofts-water-loss?utm_source=profile&utm_medium=reader2">Solving Microsoft's Water Loss</a><br>
+                <a href="https://maxprovenzano.substack.com/p/top-8-solution-for-microsofts-struggles?utm_source=profile&utm_medium=reader2">Top 8 Solution for Microsoft's Struggles</a>
+            </p>
+        </section>
 
-<section id="newsletter">
-  <h2>Newsletter</h2>
-  <p>
-    <a href="https://substack.com/@maxprovenzano?utm_source=user-menu">Check out my substack!</a><br>
-    <a href="https://maxprovenzano.substack.com/p/november-almost-here?utm_source=profile&utm_medium=reader2">Hackathon+Article</a><br>
-    <a href="https://maxprovenzano.substack.com/p/personal-spring-in-fall?utm_source=profile&utm_medium=reader2">Personal Spring in The Fall</a><br>
-    <a href="https://maxprovenzano.substack.com/p/my-most-useful-december-yet">My Most Useful December Yet</a><br>
-    <a href="https://maxprovenzano.substack.com/p/meeting-smart-people-and-selling">Meeting Smart People, Learning To Sell Myself</a>
-  </p>
-</section>
+        <section id="videos">
+            <h2>Videos</h2>
+            <p style="font-size: 18px; color: #000;">
+                Check my YouTube channel <a href="https://www.youtube.com/@MaxProvenzano1232">here</a>
+            </p>
+            <p>
+                <a href="https://www.youtube.com/watch?v=UCJ-gE-paDw">I Generated Fake Human Faces</a><br>
+                <a href="https://www.youtube.com/watch?v=Iuq2zIPGR4k">Multiagent Systems to Create AGI</a><br>
+                <a href="https://youtu.be/XscVjNwR6lw">Creating AGI Agent with Today's LLMs</a><br>
+                <a href="https://www.youtube.com/watch?v=V50ihfH7fuQ">My implementation of LLM Generated Agents</a><br>
+                <a href="https://www.youtube.com/watch?v=EZKwDaEM3gc">Designing Soilaine, A Theoretical Nanotech Tool to Combat Drought</a>
+            </p>
+        </section>
 
-<section id="videos">
-  <h2>Videos</h2>
-  <p>
-    <a href="https://www.youtube.com/watch?v=UCJ-gE-paDw">I generated Fake Human Faces</a><br>
-    <a href="https://www.youtube.com/watch?v=Iuq2zIPGR4k">Multiagent Systems to Create AGI</a><br>
-    <a href="https://youtu.be/XscVjNwR6lw">Creating AGI Agent with Today's LLMs</a>
-  </p>
-</section>
-  <section id="articles">
-  <h2>Articles</h2>
-  <p>
-    <a href="https://medium.com/@mxxprxx1">Medium Page!</a><br> 
-    <a href="https://medium.com/ai-in-plain-english/stupid-phone-robot-therapists-nlp-and-transformers-c35642c6910e?source=user_profile---------0----------------------------">Stupid Phone Robot Therapists, NLP, and Transformers</a><br>
-    <a href="https://medium.com/@mxxprxx1/competition-brings-out-the-best-in-ai-406e64dac759">Competition Brings Out The Best In AI</a>
-  </p>
-</section>
+        <section id="articles">
+            <h2>Articles</h2>
+            <p style="font-size: 18px; color: #000;">
+                Check my Medium page <a href="https://medium.com/@mxxprxx1">here</a>
+            </p>
+            <p>
+                <a href="https://medium.com/ai-in-plain-english/stupid-phone-robot-therapists-nlp-and-transformers-c35642c6910e?source=user_profile---------0----------------------------">Stupid Phone Robot Therapists, NLP, and Transformers</a><br>
+                <a href="https://medium.com/@mxxprxx1/competition-brings-out-the-best-in-ai-406e64dac759">Competition Brings Out The Best In AI</a><br>
+                <a href="https://medium.com/@mxxprxx1/llm-generated-agents-5edc679c9f7e">LLM Generated Agents</a><br>
+                <a href="https://medium.com/@mxxprxx1/soilane-smart-soil-for-drought-b6fc3cd0ec13">Soilaine, Smart Soil for Drought</a><br>
+                <a href="https://medium.com/@mxxprxx1/your-bed-is-dirty-3e337fd09be6">Your Bed is Dirty</a><br>
+            </p>
+        </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>mxxprxx1@protonmail.com<br> <a href="https://www.linkedin.com/in/max-provenzano-91982a290/">Linkedin</a><br><a href="https://twitter.com/Max_Provenzano7"> Twitter</a></p>
-</section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p style="color: #000;">mxxprxx1@gmail.com<br> 
+                <a href="https://www.linkedin.com/in/max-provenzano-91982a290/">Linkedin</a><br>
+                <a href="https://twitter.com/Max_Provenzano7">Twitter</a>
+            </p>
+        </section>
+    </div>
 
-<footer>
-  <p>&copy; 2023 Max Provenzano</p>
-</footer>
+    <style>
+        .content-box {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
 
-<script>
-  // Simple fade-in effect on page load
-  window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-  });
-</script>
+        .about-me-box {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .content-box section, .about-me-box section {
+            margin-bottom: 30px;
+        }
+
+        .content-box h2, .about-me-box h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #000;
+        }
+
+        .content-box p, .about-me-box p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .content-box a, .about-me-box a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .content-box a:hover, .about-me-box a:hover {
+            text-decoration: underline;
+        }
+
+        .content-box ul, .about-me-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .content-box ul li, .about-me-box ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <footer>
+        <p style="color: #000;">&copy; 2023 Max Provenzano</p>
+    </footer>
+
+    <script>
+        // Simple fade-in effect on page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
 </body>
 </html>
+
